@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'zakaznici/style.css' %}">
+
 {% if latest_zakaznici_list %}
     <ul>
     {% for zakaznici in latest_zakaznici_list %}
