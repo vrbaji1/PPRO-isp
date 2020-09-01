@@ -1,0 +1,10 @@
+{% if latest_zakaznici_list %}
+    <ul>
+    {% for zakaznici in latest_zakaznici_list %}
+        <li><a href="{% url 'zakaznici:detail' zakaznici.id %}">{{ zakaznici }}</a></li>
+        <li><a href="{% url 'zakaznici:vote' zakaznici.id %}">vote {{ zakaznici }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No zakaznici are available.</p>
+{% endif %}

@@ -1,0 +1,9 @@
+<h1>{{ zakaznici }}</h1>
+
+<ul>
+{% for ipv4 in zakaznici.ipv4_set.all %}
+    <li>{{ ipv4.ip_adresa }} -- {{ ipv4.votes }} vote{{ ipv4.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'zakaznici:detail' zakaznici.id %}">Vote again?</a>
