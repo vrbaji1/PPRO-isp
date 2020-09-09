@@ -1,0 +1,3 @@
+Log vcetne zmenenych souboru:
+$ git log --name-status
+$ git log --stat

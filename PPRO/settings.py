@@ -31,13 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'zakaznici.apps.ZakazniciConfig',
+    'isp.apps.IspConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     #TODO asi docasne
+    #'django_rename_app',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +82,19 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+## mysql nemuzu pouzit, mysqlclient 1.3.13 or newer is required; you have 1.3.10.
+## to tezko vyresim, rozhodil bych si cele distro
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'ppro',
+#        'USER': 'ppro',
+#        'PASSWORD': 'LLheiJRm33SlbJ1v',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#    }
+#}
 
 
 # Password validation
