@@ -1,0 +1,14 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'isp/style.css' %}">
+
+{% if latest_zakaznici_list %}
+    <ul>
+    {% for zakaznici in latest_zakaznici_list %}
+        <li><a href="{% url 'isp:detail' zakaznici.id %}">{{ zakaznici }}</a></li>
+        <li><a href="{% url 'isp:vote' zakaznici.id %}">vote {{ zakaznici }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No zakaznici are available.</p>
+{% endif %}
