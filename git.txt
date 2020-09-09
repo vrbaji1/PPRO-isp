@@ -1,3 +1,12 @@
 Log vcetne zmenenych souboru:
 $ git log --name-status
 $ git log --stat
+
+Zjistit aktualni stav:
+$ git status
+
+Nahrat zmeny do repozitare:
+$ git commit -m "Popis zmen."
+
+Zjistit provedene upravy:
+$ git diff
