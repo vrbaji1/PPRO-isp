@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -38,6 +38,16 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Zakaznici
     template_name = 'isp/detail.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class ZakaznikEdit(generic.UpdateView):
+    model = Zakaznici
+    fields = ['prijmeni','jmeno','telefon','email']
+    template_name = 'isp/zakaznik_editace.html'
+    success_url = reverse_lazy('isp:index')
+    #nebo navrat na sebe samo
+    #success_url = "."
 
 
 @method_decorator(login_required, name='dispatch')

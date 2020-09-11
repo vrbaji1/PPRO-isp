@@ -4,11 +4,35 @@
 
 {% if latest_zakaznici_list %}
     <ul>
-    {% for zakaznici in latest_zakaznici_list %}
-        <li><a href="{% url 'isp:detail' zakaznici.id %}">{{ zakaznici }}</a></li>
-        <li><a href="{% url 'isp:vote' zakaznici.id %}">vote {{ zakaznici }}</a></li>
+    {% for zakaznik in latest_zakaznici_list %}
+        <li><a href="{% url 'isp:detail' zakaznik.id %}">{{ zakaznik }}</a></li>
+        <li><a href="{% url 'isp:vote' zakaznik.id %}">vote {{ zakaznik }}</a></li>
     {% endfor %}
     </ul>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Příjmení</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for zakaznik in latest_zakaznici_list %}
+        <tr>
+            <td>{{ zakaznik.id }}</td>
+            <td>{{ zakaznik.jmeno }}</td>
+            <td>{{ zakaznik.prijmeni }}</td>
+            <td>{{ zakaznik.telefon }}</td>
+            <td>{{ zakaznik.email }}</td>
+            <td><a href="{% url 'isp:detail' zakaznik.id %}">detail</a></td>
+            <td><a href="{% url 'isp:zakaznik_editace' zakaznik.id %}">edituj zakaznika</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
 {% else %}
-    <p>No zakaznici are available.</p>
+    <p>Neexistují žádní zákazníci.</p>
 {% endif %}

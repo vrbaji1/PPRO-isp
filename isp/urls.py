@@ -8,6 +8,7 @@ urlpatterns = [
     #path('', views.index, name='index'),
     #path('<int:zakaznici_id>/', views.detail, name='detail'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    path('zak_<int:pk>/', views.ZakaznikEdit.as_view(), name='zakaznik_editace'),
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:zakaznici_id>/vote/', views.vote, name='vote'),
 ]
