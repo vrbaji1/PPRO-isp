@@ -2,16 +2,18 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 #from django.template import loader
 
 from .models import Ipv4, Zakaznici
 
-
+#@login_required
 #def index(request):
 #    latest_zakaznici_list = Zakaznici.objects.order_by('-id')[:5]
 #    context = {'latest_zakaznici_list': latest_zakaznici_list}
-#    return render(request, 'zakaznici/index.html', context)
+#    return render(request, 'isp/index.html', context)
 #
 #def detail(request, zakaznici_id):
 #    zakaznik = get_object_or_404(Zakaznici, pk=zakaznici_id)
@@ -21,6 +23,8 @@ from .models import Ipv4, Zakaznici
 #    zakaznik = get_object_or_404(Zakaznici, pk=zakaznici_id)
 #    return render(request, 'zakaznici/results.html', {'zakaznik': zakaznik})
 
+
+@method_decorator(login_required, name='dispatch')
 class IndexView(generic.ListView):
     template_name = 'isp/index.html'
     context_object_name = 'latest_zakaznici_list'
@@ -30,17 +34,20 @@ class IndexView(generic.ListView):
         return Zakaznici.objects.order_by('-id')[:5]
 
 
+@method_decorator(login_required, name='dispatch')
 class DetailView(generic.DetailView):
     model = Zakaznici
     template_name = 'isp/detail.html'
 
 
+@method_decorator(login_required, name='dispatch')
 class ResultsView(generic.DetailView):
     model = Zakaznici
     template_name = 'isp/results.html'
 
 
 #TODO jen testovaci
+@login_required
 def vote(request, zakaznici_id):
     zakaznici = get_object_or_404(Zakaznici, pk=zakaznici_id)
     try:
