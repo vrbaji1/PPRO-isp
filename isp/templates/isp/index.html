@@ -2,13 +2,15 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'isp/style.css' %}">
 
-{% if latest_zakaznici_list %}
+{% if zakaznici_list %}
+    {% comment %}
     <ul>
-    {% for zakaznik in latest_zakaznici_list %}
+    {% for zakaznik in zakaznici_list %}
         <li><a href="{% url 'isp:detail' zakaznik.id %}">{{ zakaznik }}</a></li>
         <li><a href="{% url 'isp:vote' zakaznik.id %}">vote {{ zakaznik }}</a></li>
     {% endfor %}
     </ul>
+    {% endcomment %}
 
     <table>
         <tr>
@@ -20,15 +22,16 @@
             <th></th>
             <th></th>
         </tr>
-        {% for zakaznik in latest_zakaznici_list %}
+        {% for zakaznik in zakaznici_list %}
         <tr>
             <td>{{ zakaznik.id }}</td>
             <td>{{ zakaznik.jmeno }}</td>
             <td>{{ zakaznik.prijmeni }}</td>
             <td>{{ zakaznik.telefon }}</td>
             <td>{{ zakaznik.email }}</td>
-            <td><a href="{% url 'isp:detail' zakaznik.id %}">detail</a></td>
-            <td><a href="{% url 'isp:zakaznik_editace' zakaznik.id %}">edituj zakaznika</a></td>
+            <td><a href="{% url 'isp:detail' zakaznik.id %}">TODO vote</a></td>
+            <td><a href="{% url 'isp:zakaznik_edit' zakaznik.id %}">edituj zakaznika</a></td>
+            <td><a href="{% url 'isp:zakaznik_smaz' zakaznik.id %}">smazat zakaznika</a></td>
         </tr>
         {% endfor %}
     </table>
@@ -36,3 +39,5 @@
 {% else %}
     <p>Neexistují žádní zákazníci.</p>
 {% endif %}
+
+<a href="{% url 'isp:zakaznik_vloz' %}">vložit zákazníka</a></td>

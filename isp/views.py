@@ -27,17 +27,26 @@ from .models import Ipv4, Zakaznici
 @method_decorator(login_required, name='dispatch')
 class IndexView(generic.ListView):
     template_name = 'isp/index.html'
-    context_object_name = 'latest_zakaznici_list'
+    context_object_name = 'zakaznici_list'
 
     def get_queryset(self):
-        """Return the last five zakaznici."""
-        return Zakaznici.objects.order_by('-id')[:5]
+        """Vraci seznam zakazniku."""
+        #return Zakaznici.objects.order_by('-id')[:5]
+        return Zakaznici.objects.all()
 
 
 @method_decorator(login_required, name='dispatch')
 class DetailView(generic.DetailView):
     model = Zakaznici
     template_name = 'isp/detail.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class ZakaznikVloz(generic.CreateView):
+    model = Zakaznici
+    fields = ['prijmeni','jmeno','telefon','email']
+    template_name = 'isp/zakaznik_vloz.html'
+    success_url = reverse_lazy('isp:index')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -48,6 +57,16 @@ class ZakaznikEdit(generic.UpdateView):
     success_url = reverse_lazy('isp:index')
     #nebo navrat na sebe samo
     #success_url = "."
+    #def get_context_data(self, **kwargs):
+    #    context = super(ZakaznikEdit, self).get_context_data(**kwargs)
+    #    context['ipv4_adresy'] = Ipv4.objects.all() #whatever you would like
+    #    return context
+
+
+@method_decorator(login_required, name='dispatch')
+class ZakaznikSmaz(generic.DeleteView):
+    model = Zakaznici
+    success_url = reverse_lazy('isp:index')
 
 
 @method_decorator(login_required, name='dispatch')
