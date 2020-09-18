@@ -1,0 +1,12 @@
+Vytvorit migraci
+$ thon manage.py makemigrations isp --name popis_zmeny_jinak_se_vytvori_automaticky
+
+Provezt migraci
+$ python manage.py migrate
+
+Omrknout databazove:
+$ python manage.py dbshell
+$ .schema --indent tabulka
+$ select * from tabulka;
+
+Dalsi info napr. https://realpython.com/django-migrations-a-primer/#changing-models

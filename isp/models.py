@@ -14,8 +14,8 @@ class Zakaznici(models.Model):
 
 
 class Ipv4(models.Model):
-    ip_adresa = models.IntegerField()
-    aktivni = models.CharField(max_length=1)
+    ip_adresa = models.GenericIPAddressField(protocol='IPv4', unpack_ipv4=False)
+    aktivni = models.BooleanField(default=False)
     id_zakaznika = models.ForeignKey(Zakaznici, on_delete=models.CASCADE)
     #TODO jen zkusebni
     votes = models.IntegerField(default=0)

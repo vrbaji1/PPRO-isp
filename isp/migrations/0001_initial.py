@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('ip_adresa', models.IntegerField()),
                 ('aktivni', models.CharField(max_length=1)),
-                ('id_zakaznika', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='zakaznici.Zakaznici')),
+                ('id_zakaznika', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='isp.Zakaznici')),
             ],
         ),
     ]
