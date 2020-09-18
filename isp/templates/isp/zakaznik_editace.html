@@ -37,7 +37,7 @@
     {% comment %}
     <li>{{ ipv4 }} <a href="{% url 'isp:ipv4_update' ipv4.id %}">upravit</a> <a href="{% url 'isp:ipv4_delete' ipv4.id %}">smazat</a></li>
     {% endcomment %}
-    <li>{{ ipv4 }} <a href="">TODO upravit</a> <a href="">TODO smazat</a></li>
+    <li>{{ ipv4 }} <a href="{% url 'isp:ipv4_edit' ipv4.id %}">upravit</a> <a href="">TODO smazat</a></li>
 {% endfor %}
-    <a href="">TODO pridat dalsi IP</a>
+    <a href="{% url 'isp:ipv4_vloz' zakaznici.id %}">pridat dalsi IP</a>
 </ul>

@@ -94,3 +94,38 @@ def vote(request, zakaznici_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('isp:results', args=(zakaznici.id,)))
+
+
+@method_decorator(login_required, name='dispatch')
+class Ipv4Vloz(generic.CreateView):
+    model = Ipv4
+    fields = ['ip_adresa','aktivni']
+    template_name = 'isp/ipv4_vloz.html'
+    #TODO
+    #success_url = reverse_lazy('isp:zakaznik_edit', args=self.kwargs.get('zakaznici_id'))
+
+    #je potřeba přepsat metodu, aby jsme ziskali cizi klic id_zakaznika
+    def form_valid(self, form):
+        #form.instance.id_zakaznika = get_object_or_404(Zakaznici, id=self.kwargs.get('zakaznici_id'))
+        #tady je rozumnejsi chyba
+        form.instance.id_zakaznika = Zakaznici.objects.get(id=self.kwargs.get('zakaznici_id'))
+        return super(Ipv4Vloz, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.kwargs['zakaznici_id']})
+
+
+@method_decorator(login_required, name='dispatch')
+class Ipv4Edit(generic.UpdateView):
+    model = Ipv4
+    fields = ['ip_adresa','aktivni']
+    template_name = 'isp/ipv4_editace.html'
+    #success_url = reverse_lazy('isp:zakaznik_edit', kwargs={'id':model.id_zakaznika})
+
+    #def get_initial(self):
+    #    return {
+    #        'ip_adresa': "10.0.0.138",
+    #    }
+
+    def get_success_url(self):
+        return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})

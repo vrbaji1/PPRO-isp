@@ -13,6 +13,9 @@ urlpatterns = [
     path('zakaznik_edit_<int:pk>/', views.ZakaznikEdit.as_view(), name='zakaznik_edit'),
     path('zakaznik_smaz_<int:pk>/', views.ZakaznikSmaz.as_view(), name='zakaznik_smaz'),
 
+    path('ipv4_vloz_<int:zakaznici_id>/', views.Ipv4Vloz.as_view(), name='ipv4_vloz'),
+    path('ipv4_edit_<int:pk>/', views.Ipv4Edit.as_view(), name='ipv4_edit'),
+
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:zakaznici_id>/vote/', views.vote, name='vote'),
 ]
