@@ -30,14 +30,7 @@
 <h2>IP adresy zákazníka</h2>
 <ul>
 {% for ipv4 in zakaznici.ipv4_set.all %}
-    {% comment %}
-    <input type="radio" name="ipv4" id="ipv4{{ forloop.counter }}" value="{{ ipv4.id }}">
-    <label for="ipv4{{ forloop.counter }}">{{ ipv4 }}</label><br>
-    {% endcomment %}
-    {% comment %}
-    <li>{{ ipv4 }} <a href="{% url 'isp:ipv4_update' ipv4.id %}">upravit</a> <a href="{% url 'isp:ipv4_delete' ipv4.id %}">smazat</a></li>
-    {% endcomment %}
-    <li>{{ ipv4 }} <a href="{% url 'isp:ipv4_edit' ipv4.id %}">upravit</a> <a href="">TODO smazat</a></li>
+    <li>{{ ipv4 }} <a href="{% url 'isp:ipv4_edit' ipv4.id %}">upravit</a> <a href="{% url 'isp:ipv4_smaz' ipv4.id %}">smazat</a></li>
 {% endfor %}
     <a href="{% url 'isp:ipv4_vloz' zakaznici.id %}">pridat dalsi IP</a>
 </ul>

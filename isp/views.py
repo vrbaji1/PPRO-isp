@@ -129,3 +129,11 @@ class Ipv4Edit(generic.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
+
+
+@method_decorator(login_required, name='dispatch')
+class Ipv4Smaz(generic.DeleteView):
+    model = Ipv4
+
+    def get_success_url(self):
+        return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
