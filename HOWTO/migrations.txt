@@ -1,11 +1,12 @@
 Vytvorit migraci
-$ thon manage.py makemigrations isp --name popis_zmeny_jinak_se_vytvori_automaticky
+$ python manage.py makemigrations isp --name popis_zmeny_jinak_se_vytvori_automaticky
 
 Provezt migraci
 $ python manage.py migrate
 
 Omrknout databazove:
 $ python manage.py dbshell
+$ .tables
 $ .schema --indent tabulka
 $ select * from tabulka;
 

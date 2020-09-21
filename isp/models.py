@@ -1,12 +1,15 @@
 from django.db import models
+from django.core.validators import RegexValidator
 import ipaddress
 
 # Create your models here.
 class Zakaznici(models.Model):
+    tel_regex = RegexValidator(regex=r'^\+?\d{9,15}$', message="Zadejte telefon ve formatu +420123456789 nebo 123456789.")
+    #
     jmeno = models.CharField(max_length=50)
     prijmeni = models.CharField(max_length=50)
-    telefon = models.IntegerField()
-    email = models.CharField(max_length=50)
+    telefon = models.CharField(validators=[tel_regex], max_length=16, blank=True)
+    email = models.EmailField(max_length=50)
     def __str__(self):
         return "%s %s" % (self.jmeno, self.prijmeni)
     def ma_email(self):
