@@ -17,6 +17,10 @@ urlpatterns = [
     path('ipv4_edit_<int:pk>/', views.Ipv4Edit.as_view(), name='ipv4_edit'),
     path('ipv4_smaz_<int:pk>/', views.Ipv4Smaz.as_view(), name='ipv4_smaz'),
 
+    path('ipv6_vloz_<int:zakaznici_id>/', views.Ipv6Vloz.as_view(), name='ipv6_vloz'),
+    path('ipv6_edit_<int:pk>/', views.Ipv6Edit.as_view(), name='ipv6_edit'),
+    path('ipv6_smaz_<int:pk>/', views.Ipv6Smaz.as_view(), name='ipv6_smaz'),
+
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:zakaznici_id>/vote/', views.vote, name='vote'),
 ]

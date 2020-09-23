@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import RegexValidator
-import ipaddress
 
 # Create your models here.
 class Zakaznici(models.Model):
@@ -23,4 +22,13 @@ class Ipv4(models.Model):
     #TODO jen zkusebni
     votes = models.IntegerField(default=0)
     def __str__(self):
-        return "%s" % (ipaddress.ip_address(self.ip_adresa))
+        return "%s" % (self.ip_adresa)
+
+
+class Ipv6(models.Model):
+    prefix = models.GenericIPAddressField(protocol='IPv6')
+    maska = models.PositiveSmallIntegerField(default=56)
+    aktivni = models.BooleanField(default=False)
+    id_zakaznika = models.ForeignKey(Zakaznici, on_delete=models.CASCADE)
+    def __str__(self):
+        return "%s/%d" % (self.prefix, self.maska)

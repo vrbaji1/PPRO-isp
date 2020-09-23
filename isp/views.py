@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 
 #from django.template import loader
 
-from .models import Ipv4, Zakaznici
+from .models import Ipv4, Ipv6, Zakaznici
 
 #@login_required
 #def index(request):
@@ -134,6 +134,45 @@ class Ipv4Edit(generic.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class Ipv4Smaz(generic.DeleteView):
     model = Ipv4
+
+    def get_success_url(self):
+        return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
+
+
+@method_decorator(login_required, name='dispatch')
+class Ipv6Vloz(generic.CreateView):
+    model = Ipv6
+    fields = ['prefix','maska','aktivni']
+    template_name = 'isp/ipv6_vloz.html'
+
+    #TODO vyresit kontrolu vlozenych dat, at nam sedi IP a maska
+    #napr. viz: https://stackoverflow.com/questions/29981690/django-form-validation-on-class-based-view
+    #ale asi to neni pro tento projekt zasadni
+
+    #je potřeba přepsat metodu, aby jsme ziskali cizi klic id_zakaznika
+    def form_valid(self, form):
+        form.instance.id_zakaznika = Zakaznici.objects.get(id=self.kwargs.get('zakaznici_id'))
+        return super(Ipv6Vloz, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.kwargs['zakaznici_id']})
+
+
+@method_decorator(login_required, name='dispatch')
+class Ipv6Edit(generic.UpdateView):
+    model = Ipv6
+    fields = ['prefix','maska','aktivni']
+    template_name = 'isp/ipv6_editace.html'
+
+    #TODO viz Ipv6Vloz
+
+    def get_success_url(self):
+        return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
+
+
+@method_decorator(login_required, name='dispatch')
+class Ipv6Smaz(generic.DeleteView):
+    model = Ipv6
 
     def get_success_url(self):
         return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
