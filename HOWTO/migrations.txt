@@ -1,4 +1,4 @@
-Vytvorit migraci
+Vytvorit migraci - lze se podivat na soubor s migraci - kdyby bylo neco spatne, lze soubor smazat (radsi nejdriv prejmenovat).
 $ python manage.py makemigrations isp --name popis_zmeny_jinak_se_vytvori_automaticky
 
 Provezt migraci
