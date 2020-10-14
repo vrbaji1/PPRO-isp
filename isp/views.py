@@ -45,7 +45,7 @@ class DetailView(generic.DetailView):
 class ZakaznikVloz(generic.CreateView):
     model = Zakaznici
     fields = ['prijmeni','jmeno','telefon','email']
-    template_name = 'isp/zakaznik_vloz.html'
+    template_name = 'isp/generic_vloz.html'
     success_url = reverse_lazy('isp:index')
 
 
@@ -66,6 +66,7 @@ class ZakaznikEdit(generic.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class ZakaznikSmaz(generic.DeleteView):
     model = Zakaznici
+    template_name = 'isp/generic_confirm_delete.html'
     success_url = reverse_lazy('isp:index')
 
 
@@ -100,7 +101,7 @@ def vote(request, zakaznici_id):
 class Ipv4Vloz(generic.CreateView):
     model = Ipv4
     fields = ['ip_adresa','aktivni']
-    template_name = 'isp/ipv4_vloz.html'
+    template_name = 'isp/generic_vloz.html'
     #TODO
     #success_url = reverse_lazy('isp:zakaznik_edit', args=self.kwargs.get('zakaznici_id'))
 
@@ -119,7 +120,7 @@ class Ipv4Vloz(generic.CreateView):
 class Ipv4Edit(generic.UpdateView):
     model = Ipv4
     fields = ['ip_adresa','aktivni']
-    template_name = 'isp/ipv4_editace.html'
+    template_name = 'isp/generic_editace.html'
     #success_url = reverse_lazy('isp:zakaznik_edit', kwargs={'id':model.id_zakaznika})
 
     #def get_initial(self):
@@ -134,6 +135,7 @@ class Ipv4Edit(generic.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class Ipv4Smaz(generic.DeleteView):
     model = Ipv4
+    template_name = 'isp/generic_confirm_delete.html'
 
     def get_success_url(self):
         return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
@@ -143,7 +145,7 @@ class Ipv4Smaz(generic.DeleteView):
 class Ipv6Vloz(generic.CreateView):
     model = Ipv6
     fields = ['prefix','maska','aktivni']
-    template_name = 'isp/ipv6_vloz.html'
+    template_name = 'isp/generic_vloz.html'
 
     #TODO vyresit kontrolu vlozenych dat, at nam sedi IP a maska
     #napr. viz: https://stackoverflow.com/questions/29981690/django-form-validation-on-class-based-view
@@ -162,7 +164,7 @@ class Ipv6Vloz(generic.CreateView):
 class Ipv6Edit(generic.UpdateView):
     model = Ipv6
     fields = ['prefix','maska','aktivni']
-    template_name = 'isp/ipv6_editace.html'
+    template_name = 'isp/generic_editace.html'
 
     #TODO viz Ipv6Vloz
 
@@ -173,6 +175,7 @@ class Ipv6Edit(generic.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class Ipv6Smaz(generic.DeleteView):
     model = Ipv6
+    template_name = 'isp/generic_confirm_delete.html'
 
     def get_success_url(self):
         return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
