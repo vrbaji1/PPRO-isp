@@ -9,6 +9,7 @@ urlpatterns = [
 
     #path('<int:zakaznici_id>/', views.detail, name='detail'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+
     path('zakaznik_vloz/', views.ZakaznikVloz.as_view(), name='zakaznik_vloz'),
     path('zakaznik_edit_<int:pk>/', views.ZakaznikEdit.as_view(), name='zakaznik_edit'),
     path('zakaznik_smaz_<int:pk>/', views.ZakaznikSmaz.as_view(), name='zakaznik_smaz'),
@@ -23,4 +24,9 @@ urlpatterns = [
 
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:zakaznici_id>/vote/', views.vote, name='vote'),
+
+    path('tarifni_skupiny/', views.TarifniSkupinyView.as_view(), name='tarifni_skupiny'),
+    path('tarifni_skupina_vloz/', views.TarifniSkupinaVloz.as_view(), name='tarifni_skupina_vloz'),
+    path('tarifni_skupina_edit_<int:pk>/', views.TarifniSkupinaEdit.as_view(), name='tarifni_skupina_edit'),
+    path('tarifni_skupina_smaz_<int:pk>/', views.TarifniSkupinaSmaz.as_view(), name='tarifni_skupina_smaz'),
 ]

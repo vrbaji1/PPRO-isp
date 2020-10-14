@@ -1,0 +1,27 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'isp/style.css' %}">
+
+{% if tarifni_skupiny_list %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for tarifni_skupina in tarifni_skupiny_list %}
+        <tr>
+            <td>{{ tarifni_skupina.id }}</td>
+            <td>{{ tarifni_skupina.nazev }}</td>
+            <td><a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}">edituj tarifní skupinu</a></td>
+            <td><a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}">smazat tarifní skupinu</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+    <p>Neexistují žádné tarifní skupiny.</p>
+{% endif %}
+
+<a href="{% url 'isp:tarifni_skupina_vloz' %}">vložit tarifní skupinu</a></td>

@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 
 #from django.template import loader
 
-from .models import Ipv4, Ipv6, Zakaznici
+from .models import Ipv4, Ipv6, Zakaznici, TarifniSkupiny, Tarify, Adresy
 
 #@login_required
 #def index(request):
@@ -176,3 +176,38 @@ class Ipv6Smaz(generic.DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('isp:zakaznik_edit', kwargs={'pk': self.object.id_zakaznika.id})
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifniSkupinyView(generic.ListView):
+    template_name = 'isp/tarifni_skupiny.html'
+    context_object_name = 'tarifni_skupiny_list'
+
+    def get_queryset(self):
+        """Vraci seznam tarifnich skupin."""
+        return TarifniSkupiny.objects.all()
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifniSkupinaVloz(generic.CreateView):
+    model = TarifniSkupiny
+    fields = ['nazev']
+    template_name = 'isp/generic_vloz.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifniSkupinaEdit(generic.UpdateView):
+    model = TarifniSkupiny
+    fields = ['nazev']
+    template_name = 'isp/generic_editace.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifniSkupinaSmaz(generic.DeleteView):
+    model = TarifniSkupiny
+    template_name = 'isp/generic_confirm_delete.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+
