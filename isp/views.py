@@ -214,3 +214,39 @@ class TarifniSkupinaSmaz(generic.DeleteView):
     success_url = reverse_lazy('isp:tarifni_skupiny')
 
 
+class TarifniSkupinaDetail(generic.UpdateView):
+    model = TarifniSkupiny
+    fields = ['nazev']
+    template_name = 'isp/tarifni_skupina_detail.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifVloz(generic.CreateView):
+    model = Tarify
+    fields = ['nazev','cena','rychlost_down','rychlost_up']
+    template_name = 'isp/generic_vloz.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+    #je potřeba přepsat metodu, aby jsme ziskali cizi klic id_zakaznika
+    def form_valid(self, form):
+        #chybejici polozka formulare podle models.py - z promenne z urls.py
+        form.instance.id_tarifniskupiny = TarifniSkupiny.objects.get(id=self.kwargs.get('ts_id'))
+        return super(TarifVloz, self).form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifEdit(generic.UpdateView):
+    model = Tarify
+    fields = ['nazev','cena','rychlost_down','rychlost_up']
+    template_name = 'isp/generic_editace.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+
+@method_decorator(login_required, name='dispatch')
+class TarifSmaz(generic.DeleteView):
+    model = Tarify
+    template_name = 'isp/generic_confirm_delete.html'
+    success_url = reverse_lazy('isp:tarifni_skupiny')
+
+

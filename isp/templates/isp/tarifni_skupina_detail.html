@@ -1,0 +1,51 @@
+<form method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Update">
+</form>
+
+{% comment %}
+{% if tarify_list %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>ID tarifní skupiny</th>
+            <th>Název</th>
+            <th>Cena</th>
+            <th>Rychlost down</th>
+            <th>Rychlost up</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for tarif in tarify_list %}
+        <tr>
+            <td>{{ tarif.id }}</td>
+            <td>{{ tarif.id_tarifni_skupiny }}</td>
+            <td>{{ tarif.nazev }}</td>
+            <td>{{ tarif.cena }}</td>
+            <td>{{ tarif.rychlost_down }}</td>
+            <td>{{ tarif.rychost_up }}</td>
+            <td><a href="{% url 'isp:tarif_edit' tarif.id %}">edituj tarif</a></td>
+            <td><a href="{% url 'isp:tarif_smaz' tarif.id %}">smazat tarif</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+    <p>Neexistují žádné tarify v této tarifní skupině.</p>
+{% endif %}
+
+<a href="{% url 'isp:tarif_vloz' tarif.id_tarifniskupiny %}">vložit tarif</a></td>
+{% endcomment %}
+
+
+
+<h2>Tarify</h2>
+<ul>
+{% for tarif in tarifniskupiny.tarify_set.all %}
+    <li>{{ tarif }} <a href="{% url 'isp:tarif_edit' tarifniskupiny.id tarif.id %}">upravit</a> <a href="{% url 'isp:tarif_smaz' tarifniskupiny.id tarif.id %}">smazat</a></li>
+{% endfor %}
+    <a href="{% url 'isp:tarif_vloz' tarifniskupiny.id %}">pridat dalsi tarif</a>
+</ul>
