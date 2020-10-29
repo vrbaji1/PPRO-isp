@@ -5,9 +5,9 @@
 {% if tarifni_skupiny_list %}
 {% for tarifni_skupina in tarifni_skupiny_list %}
 <H2>
-    ID:{{ tarifni_skupina.id }} {{ tarifni_skupina.nazev }}
-    <a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}">edituj tarifní skupinu</a>
-    <a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}">smazat tarifní skupinu</a>
+    [ID:{{ tarifni_skupina.id }}] {{ tarifni_skupina.nazev }}
+    <a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}">edituj</a>
+    <a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}">smazat</a>
 </H2>
 {% if tarifni_skupina.tarify_set.all %}
 <table border="1">
@@ -25,13 +25,10 @@
         <td>{{ tarif.cena }} Kč</td>
         <td>{{ tarif.rychlost_down }} Mbit</td>
         <td>{{ tarif.rychlost_up }} Mbit</td>
-        <td><a href="{% url 'isp:tarif_edit' tarifni_skupina.id tarif.id %}">upravit</a></td>
-        <td><a href="{% url 'isp:tarif_smaz' tarifni_skupina.id tarif.id %}">smazat</a></td>
     </tr>
 {% endfor %}
 </table>
 {% endif %}
-<P><a href="{% url 'isp:tarif_vloz' tarifni_skupina.id %}">přidat tarif v této skupině</a></P>
 <BR>
 {% endfor %}
 {% else %}

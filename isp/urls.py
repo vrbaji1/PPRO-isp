@@ -29,7 +29,7 @@ urlpatterns = [
     path('tarifni_skupina_vloz/', views.TarifniSkupinaVloz.as_view(), name='tarifni_skupina_vloz'),
     path('tarifni_skupina_edit_<int:pk>/', views.TarifniSkupinaEdit.as_view(), name='tarifni_skupina_edit'),
     path('tarifni_skupina_smaz_<int:pk>/', views.TarifniSkupinaSmaz.as_view(), name='tarifni_skupina_smaz'),
-    path('tarifni_skupina_detail_<int:pk>/', views.TarifniSkupinaDetail.as_view(), name='tarifni_skupina_detail'),
+    #path('tarifni_skupina_detail_<int:pk>/', views.TarifniSkupinaDetail.as_view(), name='tarifni_skupina_detail'),
 
     path('tarifni_skupina_<int:ts_id>/tarif_vloz/', views.TarifVloz.as_view(), name='tarif_vloz'),
     path('tarifni_skupina_<int:ts_id>/tarif_edit_<int:pk>/', views.TarifEdit.as_view(), name='tarif_edit'),

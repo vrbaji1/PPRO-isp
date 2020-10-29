@@ -1,51 +1,42 @@
+<H2>
+    [ID:{{ tarifniskupiny.id }}] {{ tarifniskupiny.nazev }}
+    <a href="{% url 'isp:tarifni_skupina_smaz' tarifniskupiny.id %}">smazat</a>
+</H2>
+
 <form method="post">
     {% csrf_token %}
     <table>
     {{ form.as_table }}
     </table>
-    <input type="submit" value="Update">
+    <input type="submit" value="Ulož">
 </form>
+<BR>
 
-{% comment %}
-{% if tarify_list %}
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>ID tarifní skupiny</th>
-            <th>Název</th>
-            <th>Cena</th>
-            <th>Rychlost down</th>
-            <th>Rychlost up</th>
-            <th></th>
-            <th></th>
-        </tr>
-        {% for tarif in tarify_list %}
-        <tr>
-            <td>{{ tarif.id }}</td>
-            <td>{{ tarif.id_tarifni_skupiny }}</td>
-            <td>{{ tarif.nazev }}</td>
-            <td>{{ tarif.cena }}</td>
-            <td>{{ tarif.rychlost_down }}</td>
-            <td>{{ tarif.rychost_up }}</td>
-            <td><a href="{% url 'isp:tarif_edit' tarif.id %}">edituj tarif</a></td>
-            <td><a href="{% url 'isp:tarif_smaz' tarif.id %}">smazat tarif</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-
-{% else %}
-    <p>Neexistují žádné tarify v této tarifní skupině.</p>
-{% endif %}
-
-<a href="{% url 'isp:tarif_vloz' tarif.id_tarifniskupiny %}">vložit tarif</a></td>
-{% endcomment %}
-
-
-
-<h2>Tarify</h2>
-<ul>
+{% if tarifniskupiny.tarify_set.all %}
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Název</th>
+        <th>Cena</th>
+        <th>Rychlost<BR>stahování</th>
+        <th>Rychlost<BR>odesílání</th>
+        <th></th>
+        <th></th>
+    </tr>
 {% for tarif in tarifniskupiny.tarify_set.all %}
-    <li>{{ tarif }} <a href="{% url 'isp:tarif_edit' tarifniskupiny.id tarif.id %}">upravit</a> <a href="{% url 'isp:tarif_smaz' tarifniskupiny.id tarif.id %}">smazat</a></li>
+    <tr>
+        <td>{{ tarif.id }}</td>
+        <td>{{ tarif.nazev }}</td>
+        <td>{{ tarif.cena }} Kč</td>
+        <td>{{ tarif.rychlost_down }} Mbit</td>
+        <td>{{ tarif.rychlost_up }} Mbit</td>
+        <td><a href="{% url 'isp:tarif_edit' tarifniskupiny.id tarif.id %}">upravit</a></td>
+        <td><a href="{% url 'isp:tarif_smaz' tarifniskupiny.id tarif.id %}">smazat</a></td>
+    </tr>
 {% endfor %}
-    <a href="{% url 'isp:tarif_vloz' tarifniskupiny.id %}">pridat dalsi tarif</a>
-</ul>
+</table>
+{% endif %}
+<P><a href="{% url 'isp:tarif_vloz' tarifniskupiny.id %}">přidat tarif v této skupině</a></P>
+
+
+
