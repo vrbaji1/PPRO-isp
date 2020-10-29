@@ -7,7 +7,15 @@ $ git diff
 Nahrat zmeny do repozitare:
 $ git commit -m "Popis zmen."
 
-
 Log vcetne zmenenych souboru:
 $ git log --name-status
 $ git log --stat
+
+Push:
+$ git push github master
+( 
+  nastaveni vzdaleneho repozitare github:
+  $ git remote add github https://github.com/vrbaji1/PPRO-isp.git
+  seznam nastavenych vzdalenych repozitaru:
+  $ git remote
+)
