@@ -1,7 +1,6 @@
-{% load static %}
+{% extends "isp/base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'isp/style.css' %}">
-
+{% block content %}
 {% if tarifni_skupiny_list %}
 {% for tarifni_skupina in tarifni_skupiny_list %}
 <H2>
@@ -37,3 +36,4 @@
 
 <BR>
 <P><a href="{% url 'isp:tarifni_skupina_vloz' %}">vložit další tarifní skupinu</a></P>
+{% endblock %}

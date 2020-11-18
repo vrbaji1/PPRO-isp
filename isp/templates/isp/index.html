@@ -1,7 +1,6 @@
-{% load static %}
+{% extends "isp/base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'isp/style.css' %}">
-
+{% block content %}
 {% if zakaznici_list %}
     {% comment %}
     <ul>
@@ -41,3 +40,4 @@
 {% endif %}
 
 <a href="{% url 'isp:zakaznik_vloz' %}">vložit zákazníka</a></td>
+{% endblock %}
