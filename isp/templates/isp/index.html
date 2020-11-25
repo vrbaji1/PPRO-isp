@@ -1,4 +1,5 @@
 {% extends "isp/base.html" %}
+{% load static %}
 
 {% block content %}
 {% if zakaznici_list %}
@@ -29,8 +30,8 @@
             <td>{{ zakaznik.telefon }}</td>
             <td>{{ zakaznik.email }}</td>
             <td><a href="{% url 'isp:detail' zakaznik.id %}">TODO vote</a></td>
-            <td><a href="{% url 'isp:zakaznik_edit' zakaznik.id %}">edituj zakaznika</a></td>
-            <td><a href="{% url 'isp:zakaznik_smaz' zakaznik.id %}">smazat zakaznika</a></td>
+            <td><a href="{% url 'isp:zakaznik_edit' zakaznik.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='edituj zákazníka' title='edituj zákazníka'></a></td>
+            <td><a href="{% url 'isp:zakaznik_smaz' zakaznik.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smaž zákazníka' title='smaž zákazníka'></a></td>
         </tr>
         {% endfor %}
     </table>

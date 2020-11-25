@@ -1,12 +1,13 @@
 {% extends "isp/base.html" %}
+{% load static %}
 
 {% block content %}
 {% if tarifni_skupiny_list %}
 {% for tarifni_skupina in tarifni_skupiny_list %}
 <H2>
     [ID:{{ tarifni_skupina.id }}] {{ tarifni_skupina.nazev }}
-    <a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}">edituj</a>
-    <a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}">smazat</a>
+    <a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='edituj tarifní skupinu' title='edituj tarifní skupinu'></a>
+    <a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smaž tarifní skupinu' title='smaž tarifní skupinu'></a>
 </H2>
 {% if tarifni_skupina.tarify_set.all %}
 <table border="1">

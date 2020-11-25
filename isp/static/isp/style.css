@@ -1,7 +1,28 @@
-li a {
-    color: green;
+body {
+	margin: auto;
+	font-size: 12pt;
 }
 
-body {
-    background: white url("images/background.jpg") no-repeat;
+/* lista s odkazy */
+#panel {
+	background-color: #fda;
+	text-align: center;
+	margin-bottom: 20px;
+	/* hotni a dolni, leva a prava */
+	padding: 2px 0px;
+	border-bottom: 3px #000 solid;
+}
+#panel a {
+	padding: 2px 7px;
+	text-decoration: none;
+	color: #000 ; 
+}
+#panel a:hover {
+	background-color: #f96;
+}
+
+/* obsah webu pod panelem */
+#content {
+        /* horni, prava, dolni, leva */
+	margin: 0px 20px 0px 20px;
 }
