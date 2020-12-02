@@ -1,45 +1,41 @@
+{% extends "isp/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Editace zákazníka</h2>
+
 <form method="post">
     {% csrf_token %}
     <table>
     {{ form.as_table }}
     </table>
-    <input type="submit" value="Update">
+    <input type="submit" value="Uložit">
+    <a href="{% url 'isp:zakaznici' %}">zpět na seznam zákazníků</a>
 </form>
-
-
-{% comment %}
-<form action="{% url 'isp:zakaznik_editace' zakaznici.id %}" method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-        </div>
-    {% endfor %}
-    {% for ipv4 in ipv4_adresy %}
-       <label for="ipv4{{ forloop.counter }}">IPv4_{{ forloop.counter }}</label> <input type="text" name="ipv4" id="ipv4{{ forloop.counter }}" value="{{ ipv4 }}">
-    {% endfor %}
-    <p><input type="submit" value="Update" /></p>
-</form>
-{% endcomment %}
-
 
 <h2>IPv4 adresy zákazníka</h2>
 <ul>
 {% for ipv4 in zakaznici.ipv4_set.all %}
-    <li>{{ ipv4 }} <a href="{% url 'isp:ipv4_edit' ipv4.id %}">upravit</a> <a href="{% url 'isp:ipv4_smaz' ipv4.id %}">smazat</a></li>
+    <li>
+        {{ ipv4 }}
+        <a href="{% url 'isp:ipv4_edit' ipv4.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='upravit' title='upravit'></a>
+        <a href="{% url 'isp:ipv4_smaz' ipv4.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smazat' title='smazat'></a>
+    </li>
 {% endfor %}
-    <a href="{% url 'isp:ipv4_vloz' zakaznici.id %}">pridat dalsi IP</a>
+    <a href="{% url 'isp:ipv4_vloz' zakaznici.id %}">přidat další IPv4</a>
 </ul>
-
 
 <h2>IPv6 adresy zákazníka</h2>
 <ul>
 {% for ipv6 in zakaznici.ipv6_set.all %}
-    <li>{{ ipv6 }} <a href="{% url 'isp:ipv6_edit' ipv6.id %}">upravit</a> <a href="{% url 'isp:ipv6_smaz' ipv6.id %}">smazat</a></li>
+    <li>
+        {{ ipv6 }}
+        <a href="{% url 'isp:ipv6_edit' ipv6.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='upravit' title='upravit'></a>
+        <a href="{% url 'isp:ipv6_smaz' ipv6.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smazat' title='smazat'></a>
+    </li>
 {% endfor %}
-    <a href="{% url 'isp:ipv6_vloz' zakaznici.id %}">pridat dalsi IP</a>
+    <a href="{% url 'isp:ipv6_vloz' zakaznici.id %}">přidat další IPv6</a>
 </ul>
+
+{% endblock %}

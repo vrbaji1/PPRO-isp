@@ -1,6 +1,13 @@
+{% extends "isp/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Editace tarifní skupiny</h2>
+
 <H2>
     [ID:{{ tarifniskupiny.id }}] {{ tarifniskupiny.nazev }}
-    <a href="{% url 'isp:tarifni_skupina_smaz' tarifniskupiny.id %}">smazat</a>
+    <a href="{% url 'isp:tarifni_skupina_smaz' tarifniskupiny.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smazat' title='smazat'></a>
 </H2>
 
 <form method="post">
@@ -9,6 +16,8 @@
     {{ form.as_table }}
     </table>
     <input type="submit" value="Ulož">
+    <a href="{% url 'isp:tarifni_skupiny' %}">zpět na tabulku tarifů</a>
+
 </form>
 <BR>
 
@@ -30,13 +39,12 @@
         <td>{{ tarif.cena }} Kč</td>
         <td>{{ tarif.rychlost_down }} Mbit</td>
         <td>{{ tarif.rychlost_up }} Mbit</td>
-        <td><a href="{% url 'isp:tarif_edit' tarifniskupiny.id tarif.id %}">upravit</a></td>
-        <td><a href="{% url 'isp:tarif_smaz' tarifniskupiny.id tarif.id %}">smazat</a></td>
+        <td><a href="{% url 'isp:tarif_edit' tarifniskupiny.id tarif.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='upravit' title='upravit'></a></td>
+        <td><a href="{% url 'isp:tarif_smaz' tarifniskupiny.id tarif.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smazat' title='smazat'></a></td>
     </tr>
 {% endfor %}
 </table>
 {% endif %}
 <P><a href="{% url 'isp:tarif_vloz' tarifniskupiny.id %}">přidat tarif v této skupině</a></P>
 
-
-
+{% endblock %}
