@@ -13,6 +13,22 @@ from .models import Ipv4, Ipv6, Zakaznici, TarifniSkupiny, Tarify, Adresy
 @method_decorator(login_required, name='dispatch')
 class IndexView(generic.TemplateView):
     template_name = 'isp/index.html'
+    pocet_Z = Zakaznici.objects.count()
+    pocet_IP4 = Ipv4.objects.count()
+    pocet_IP6 = Ipv6.objects.count()
+    pocet_TS = TarifniSkupiny.objects.count()
+    pocet_T = Tarify.objects.count()
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context.update({
+            'pocet_Z': self.pocet_Z,
+            'pocet_IP4': self.pocet_IP4,
+            'pocet_IP6': self.pocet_IP6,
+            'pocet_TS': self.pocet_TS,
+            'pocet_T': self.pocet_T,
+            })
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
