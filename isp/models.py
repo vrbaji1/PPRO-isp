@@ -50,8 +50,6 @@ class Ipv4(models.Model):
     ip_adresa = models.GenericIPAddressField(protocol='IPv4', unpack_ipv4=False)
     aktivni = models.BooleanField(default=False)
     id_zakaznika = models.ForeignKey(Zakaznici, on_delete=models.CASCADE)
-    #TODO jen zkusebni
-    votes = models.IntegerField(default=0)
     def __str__(self):
         return "%s" % (self.ip_adresa)
 

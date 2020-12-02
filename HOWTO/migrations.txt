@@ -1,6 +1,9 @@
 Vytvorit migraci - lze se podivat na soubor s migraci - kdyby bylo neco spatne, lze soubor smazat (radsi nejdriv prejmenovat).
 $ python manage.py makemigrations isp --name popis_zmeny_jinak_se_vytvori_automaticky
 
+Vypsat zamyslene SQL prikazy pro kontrolu
+$ python manage.py sqlmigrate isp <cislo nebo jiny identifikator>
+
 Provezt migraci
 $ python manage.py migrate
 
