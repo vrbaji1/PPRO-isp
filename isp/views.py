@@ -11,8 +11,13 @@ from .models import Ipv4, Ipv6, Zakaznici, TarifniSkupiny, Tarify, Adresy
 
 
 @method_decorator(login_required, name='dispatch')
-class IndexView(generic.ListView):
+class IndexView(generic.TemplateView):
     template_name = 'isp/index.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class ZakazniciView(generic.ListView):
+    template_name = 'isp/zakaznici.html'
     context_object_name = 'zakaznici_list'
 
     def get_queryset(self):
@@ -26,7 +31,7 @@ class ZakaznikVloz(generic.CreateView):
     model = Zakaznici
     fields = ['prijmeni','jmeno','telefon','email']
     template_name = 'isp/generic_vloz.html'
-    success_url = reverse_lazy('isp:index')
+    success_url = reverse_lazy('isp:zakaznici')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -34,7 +39,7 @@ class ZakaznikEdit(generic.UpdateView):
     model = Zakaznici
     fields = ['prijmeni','jmeno','telefon','email']
     template_name = 'isp/zakaznik_editace.html'
-    success_url = reverse_lazy('isp:index')
+    success_url = reverse_lazy('isp:zakaznici')
     #nebo navrat na sebe samo
     #success_url = "."
     #def get_context_data(self, **kwargs):
@@ -47,7 +52,7 @@ class ZakaznikEdit(generic.UpdateView):
 class ZakaznikSmaz(generic.DeleteView):
     model = Zakaznici
     template_name = 'isp/generic_confirm_delete.html'
-    success_url = reverse_lazy('isp:index')
+    success_url = reverse_lazy('isp:zakaznici')
 
 
 @method_decorator(login_required, name='dispatch')

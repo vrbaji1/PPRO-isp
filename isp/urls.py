@@ -5,8 +5,8 @@ from . import views
 app_name = 'isp'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    #path('', views.index, name='index'),
 
+    path('zakaznici/', views.ZakazniciView.as_view(), name='zakaznici'),
     path('zakaznik_vloz/', views.ZakaznikVloz.as_view(), name='zakaznik_vloz'),
     path('zakaznik_edit_<int:pk>/', views.ZakaznikEdit.as_view(), name='zakaznik_edit'),
     path('zakaznik_smaz_<int:pk>/', views.ZakaznikSmaz.as_view(), name='zakaznik_smaz'),
@@ -23,7 +23,6 @@ urlpatterns = [
     path('tarifni_skupina_vloz/', views.TarifniSkupinaVloz.as_view(), name='tarifni_skupina_vloz'),
     path('tarifni_skupina_edit_<int:pk>/', views.TarifniSkupinaEdit.as_view(), name='tarifni_skupina_edit'),
     path('tarifni_skupina_smaz_<int:pk>/', views.TarifniSkupinaSmaz.as_view(), name='tarifni_skupina_smaz'),
-    #path('tarifni_skupina_detail_<int:pk>/', views.TarifniSkupinaDetail.as_view(), name='tarifni_skupina_detail'),
 
     path('tarifni_skupina_<int:ts_id>/tarif_vloz/', views.TarifVloz.as_view(), name='tarif_vloz'),
     path('tarifni_skupina_<int:ts_id>/tarif_edit_<int:pk>/', views.TarifEdit.as_view(), name='tarif_edit'),
