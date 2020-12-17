@@ -5,7 +5,7 @@ Zjistit provedene upravy:
 $ git diff
 
 Nahrat zmeny do repozitare:
-$ git commit -m "Popis zmen."
+$ git commit
 
 Log vcetne zmenenych souboru:
 $ git log --name-status
