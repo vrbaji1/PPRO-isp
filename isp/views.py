@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 
 from .models import Ipv4, Ipv6, Zakaznici, TarifniSkupiny, Tarify, Adresy
 
+#from .forms import ZakaznikEditForm
 
 @method_decorator(login_required, name='dispatch')
 class IndexView(generic.TemplateView):
@@ -53,15 +54,36 @@ class ZakaznikVloz(generic.CreateView):
 @method_decorator(login_required, name='dispatch')
 class ZakaznikEdit(generic.UpdateView):
     model = Zakaznici
-    fields = ['prijmeni','jmeno','telefon','email']
+    fields = ['prijmeni','jmeno','telefon','email','id_adresy','id_tarifu']
+    #form_class = ZakaznikEditForm
     template_name = 'isp/zakaznik_editace.html'
     success_url = reverse_lazy('isp:zakaznici')
-    #nebo navrat na sebe samo
-    #success_url = "."
-    #def get_context_data(self, **kwargs):
-    #    context = super(ZakaznikEdit, self).get_context_data(**kwargs)
-    #    context['ipv4_adresy'] = Ipv4.objects.all() #whatever you would like
-    #    return context
+
+    #pro poslani promenne do forms
+    #def get_form_kwargs(self, **kwargs):
+    #    form_kwargs = super(ZakaznikEdit, self).get_form_kwargs(**kwargs)
+    #    form_kwargs["id_tarifniskupiny"] = self.object.id_adresy.id_tarifniskupiny
+    #    return form_kwargs
+
+    #lepsi vyber tarifu by se asi musel resit pres JS
+    tarify = Tarify.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super(ZakaznikEdit, self).get_context_data(**kwargs)
+        context.update({
+            'tarify': self.tarify,
+            })
+        return context
+
+    #kontrola vyberu tarifu ze spravne skupiny podle adresy
+    def form_valid(self, form):
+        adresa=Adresy.objects.filter(id=form['id_adresy'].value())[0]
+        tarif=Tarify.objects.filter(id=form['id_tarifu'].value())[0]
+        #pokud id tarifni skupiny neodpovida dle vybraneho tarifu vs. dle adresy
+        if (tarif.id_tarifniskupiny.id != adresa.id_tarifniskupiny.id):
+            form.add_error('id_tarifu', 'Na dané adrese není takový tarif k dispozici, volte z tarifní skupiny "%s"!' % adresa.id_tarifniskupiny.nazev)
+            return super(ZakaznikEdit, self).form_invalid(form)
+        else:
+            return super(ZakaznikEdit, self).form_valid(form)
 
 
 @method_decorator(login_required, name='dispatch')

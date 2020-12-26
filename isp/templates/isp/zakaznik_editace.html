@@ -8,7 +8,34 @@
 <form method="post">
     {% csrf_token %}
     <table>
-    {{ form.as_table }}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>{{ field.errors }}
+                {% if field.name == "id_tarifu" %}
+                    <select name="id_tarifu" required id="id_id_tarifu">
+                        <option value="">---------</option>
+                        {%for tarif in tarify %}
+                        {% if tarif.id_tarifniskupiny == zakaznici.id_adresy.id_tarifniskupiny %}
+                        <option value="{{tarif.id}}" {% if tarif.id == zakaznici.id_tarifu.id %}selected{% endif %}>{{tarif}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    {{ field }}
+                {% endif %}
+                </td>
+                {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        {% comment %}
+        {{ form.as_table }}
+        {% endcomment %}
+
     </table>
     <input type="submit" value="Uložit">
     <a href="{% url 'isp:zakaznici' %}">zpět na seznam zákazníků</a>

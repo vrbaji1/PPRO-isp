@@ -18,7 +18,7 @@ class Tarify(models.Model):
     rychlost_up = models.PositiveIntegerField()
     id_tarifniskupiny = models.ForeignKey(TarifniSkupiny, on_delete=models.CASCADE)
     def __str__(self):
-        return "%s" % (self.nazev)
+        return "%s (%s)" % (self.nazev, self.id_tarifniskupiny.nazev)
 
 
 class Adresy(models.Model):
