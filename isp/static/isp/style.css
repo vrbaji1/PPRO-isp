@@ -26,3 +26,15 @@ body {
         /* horni, prava, dolni, leva */
 	margin: 0px 20px 0px 20px;
 }
+
+table.zakaznici {
+  /* mezery mezi sloupecky tabulky */
+  border-spacing: 10px 0px;
+  border-collapse: separate;
+}
+
+/* sede a preskrtnute */
+span.neaktivni {
+  color:gray;
+  text-decoration: line-through;
+}

@@ -45,7 +45,7 @@
 <ul>
 {% for ipv4 in zakaznici.ipv4_set.all %}
     <li>
-        {{ ipv4 }}
+        <span {% if not ipv4.aktivni %}class='neaktivni'{% endif %}>{{ ipv4 }}</span>
         <a href="{% url 'isp:ipv4_edit' ipv4.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='upravit' title='upravit'></a>
         <a href="{% url 'isp:ipv4_smaz' ipv4.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smazat' title='smazat'></a>
     </li>
@@ -57,7 +57,7 @@
 <ul>
 {% for ipv6 in zakaznici.ipv6_set.all %}
     <li>
-        {{ ipv6 }}
+        <span {% if not ipv6.aktivni %}class='neaktivni'{% endif %}>{{ ipv6 }}</span>
         <a href="{% url 'isp:ipv6_edit' ipv6.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='upravit' title='upravit'></a>
         <a href="{% url 'isp:ipv6_smaz' ipv6.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smazat' title='smazat'></a>
     </li>

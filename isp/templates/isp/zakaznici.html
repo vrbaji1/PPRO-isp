@@ -7,13 +7,15 @@
 
 {% if zakaznici_list %}
 
-    <table>
+    <table class="zakaznici">
         <tr>
             <th>ID</th>
             <th>Jméno</th>
             <th>Příjmení</th>
             <th>Telefon</th>
             <th>Email</th>
+            <th>Adresa</th>
+            <th>Tarif</th>
             <th></th>
             <th></th>
         </tr>
@@ -24,6 +26,8 @@
             <td>{{ zakaznik.prijmeni }}</td>
             <td>{{ zakaznik.telefon }}</td>
             <td>{{ zakaznik.email }}</td>
+            <td>{{ zakaznik.id_adresy }}</td>
+            <td>{{ zakaznik.id_tarifu }}</td>
             <td><a href="{% url 'isp:zakaznik_edit' zakaznik.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='edituj zákazníka' title='edituj zákazníka'></a></td>
             <td><a href="{% url 'isp:zakaznik_smaz' zakaznik.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smaž zákazníka' title='smaž zákazníka'></a></td>
         </tr>
