@@ -48,7 +48,7 @@ class Zakaznici(models.Model):
 
 class Ipv4(models.Model):
     ip_adresa = models.GenericIPAddressField(protocol='IPv4', unpack_ipv4=False)
-    aktivni = models.BooleanField(default=False)
+    aktivni = models.BooleanField(default=True)
     id_zakaznika = models.ForeignKey(Zakaznici, on_delete=models.CASCADE)
     def __str__(self):
         return "%s" % (self.ip_adresa)
@@ -57,7 +57,7 @@ class Ipv4(models.Model):
 class Ipv6(models.Model):
     prefix = models.GenericIPAddressField(protocol='IPv6')
     maska = models.PositiveSmallIntegerField(default=56)
-    aktivni = models.BooleanField(default=False)
+    aktivni = models.BooleanField(default=True)
     id_zakaznika = models.ForeignKey(Zakaznici, on_delete=models.CASCADE)
     def __str__(self):
         return "%s/%d" % (self.prefix, self.maska)
