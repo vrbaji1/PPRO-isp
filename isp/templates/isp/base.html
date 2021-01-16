@@ -14,6 +14,9 @@
         <a href="{% url 'isp:zakaznici' %}">Zákazníci</a>
         <a href="{% url 'isp:tarifni_skupiny' %}">Tarify</a>
     </div>
+{% if user.is_authenticated %}
+    <div id="uzivatel">Přihlášen jako: {{ user.get_username }} (<a href="/accounts/logout?next=/">odhlásit</a>)</div>
+{% endif %}
 
     <div id="content">
         {% block content %}{% endblock %}

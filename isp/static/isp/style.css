@@ -21,6 +21,23 @@ body {
 	background-color: #f96;
 }
 
+/* blok odhlaseni uzivatele */
+#uzivatel {
+	position: absolute;
+	left: 1px;
+	top: 4px;
+	color:gray;
+	font-size: 8pt;
+}
+#uzivatel a {
+	text-decoration: none;
+	color:gray;
+}
+#uzivatel a:hover {
+	background-color: #f96;
+}
+
+
 /* obsah webu pod panelem */
 #content {
         /* horni, prava, dolni, leva */
