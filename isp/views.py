@@ -76,14 +76,26 @@ class ZakaznikEdit(generic.UpdateView):
 
     #kontrola vyberu tarifu ze spravne skupiny podle adresy
     def form_valid(self, form):
-        adresa=Adresy.objects.filter(id=form['id_adresy'].value())[0]
-        tarif=Tarify.objects.filter(id=form['id_tarifu'].value())[0]
-        #pokud id tarifni skupiny neodpovida dle vybraneho tarifu vs. dle adresy
-        if (tarif.id_tarifniskupiny.id != adresa.id_tarifniskupiny.id):
-            form.add_error('id_tarifu', 'Na dané adrese není takový tarif k dispozici, volte z tarifní skupiny "%s"!' % adresa.id_tarifniskupiny.nazev)
-            return super(ZakaznikEdit, self).form_invalid(form)
-        else:
+        #kdyz neni vybran tarif, neni co kontrolovat
+        if (form['id_tarifu'].value()==''):
+            #form['id_tarifu'].value=None
             return super(ZakaznikEdit, self).form_valid(form)
+        #kdyz neni vybrana adresa, taky neni co kontrolovat, ale zaroven zneplatnime nastaveni tarifu
+        elif (form['id_adresy'].value()==''):
+            #form['id_adresy'].value=None
+            #form['id_tarifu'].value=None
+            form.instance.id_tarifu=None
+            return super(ZakaznikEdit, self).form_valid(form)
+        #jinak zkontrolovat jestli k sobe sedi
+        else:
+            adresa=Adresy.objects.filter(id=form['id_adresy'].value())[0]
+            tarif=Tarify.objects.filter(id=form['id_tarifu'].value())[0]
+            #pokud id tarifni skupiny neodpovida dle vybraneho tarifu vs. dle adresy
+            if (tarif.id_tarifniskupiny.id != adresa.id_tarifniskupiny.id):
+                form.add_error('id_tarifu', 'Na dané adrese není takový tarif k dispozici, volte z tarifní skupiny "%s"!' % adresa.id_tarifniskupiny.nazev)
+                return super(ZakaznikEdit, self).form_invalid(form)
+            else:
+                return super(ZakaznikEdit, self).form_valid(form)
 
 
 @method_decorator(login_required, name='dispatch')

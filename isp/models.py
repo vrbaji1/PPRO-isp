@@ -38,8 +38,8 @@ class Zakaznici(models.Model):
     prijmeni = models.CharField(max_length=50)
     telefon = models.CharField(validators=[tel_regex], max_length=16, blank=True)
     email = models.EmailField(max_length=50, blank=True)
-    id_adresy = models.ForeignKey(Adresy, on_delete=models.PROTECT, null=True, default=None)
-    id_tarifu = models.ForeignKey(Tarify, on_delete=models.PROTECT, null=True, default=None)
+    id_adresy = models.ForeignKey(Adresy, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    id_tarifu = models.ForeignKey(Tarify, on_delete=models.PROTECT, blank=True, null=True, default=None)
     def __str__(self):
         return "%s %s" % (self.jmeno, self.prijmeni)
     def ma_email(self):

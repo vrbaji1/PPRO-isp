@@ -14,7 +14,7 @@
                 <th>{{ field.label_tag }}</th>
                 <td>{{ field.errors }}
                 {% if field.name == "id_tarifu" %}
-                    <select name="id_tarifu" required id="id_id_tarifu">
+                    <select name="id_tarifu" id="id_id_tarifu">
                         <option value="">---------</option>
                         {%for tarif in tarify %}
                         {% if tarif.id_tarifniskupiny == zakaznici.id_adresy.id_tarifniskupiny %}
