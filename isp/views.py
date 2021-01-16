@@ -186,7 +186,7 @@ class TarifniSkupinyView(generic.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(permission_required("isp.add_tarifniskupiny",raise_exception=True), name="dispatch")
+@method_decorator(permission_required("isp.add_tarifniskupiny",raise_exception=False), name="dispatch")
 class TarifniSkupinaVloz(generic.CreateView):
     model = TarifniSkupiny
     fields = ['nazev']
@@ -199,7 +199,7 @@ class TarifniSkupinaVloz(generic.CreateView):
 
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(permission_required("isp.delete_tarifniskupiny",raise_exception=True), name="dispatch")
+@method_decorator(permission_required("isp.delete_tarifniskupiny",raise_exception=False), name="dispatch")
 class TarifniSkupinaSmaz(generic.DeleteView):
     model = TarifniSkupiny
     template_name = 'isp/generic_confirm_delete.html'
@@ -207,7 +207,7 @@ class TarifniSkupinaSmaz(generic.DeleteView):
 
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(permission_required("isp.change_tarifniskupiny",raise_exception=True), name="dispatch")
+@method_decorator(permission_required("isp.change_tarifniskupiny",raise_exception=False), name="dispatch")
 class TarifniSkupinaEdit(generic.UpdateView):
     model = TarifniSkupiny
     fields = ['nazev']
@@ -220,7 +220,7 @@ class TarifniSkupinaEdit(generic.UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(permission_required("isp.add_tarify",raise_exception=True), name="dispatch")
+@method_decorator(permission_required("isp.add_tarify",raise_exception=False), name="dispatch")
 class TarifVloz(generic.CreateView):
     model = Tarify
     fields = ['nazev','cena','rychlost_down','rychlost_up']
@@ -239,7 +239,7 @@ class TarifVloz(generic.CreateView):
 
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(permission_required("isp.change_tarify",raise_exception=True), name="dispatch")
+@method_decorator(permission_required("isp.change_tarify",raise_exception=False), name="dispatch")
 class TarifEdit(generic.UpdateView):
     model = Tarify
     fields = ['nazev','cena','rychlost_down','rychlost_up']
@@ -252,7 +252,7 @@ class TarifEdit(generic.UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-@method_decorator(permission_required("isp.delete_tarify",raise_exception=True), name="dispatch")
+@method_decorator(permission_required("isp.delete_tarify",raise_exception=False), name="dispatch")
 class TarifSmaz(generic.DeleteView):
     model = Tarify
     template_name = 'isp/generic_confirm_delete.html'

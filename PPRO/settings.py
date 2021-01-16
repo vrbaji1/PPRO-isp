@@ -136,4 +136,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #kam presmerovat po prihlaseni, pokud neni definovano next v GET
-LOGIN_REDIRECT_URL = '/isp/'
+LOGIN_REDIRECT_URL = '/'

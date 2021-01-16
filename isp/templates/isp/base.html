@@ -15,7 +15,7 @@
         <a href="{% url 'isp:tarifni_skupiny' %}">Tarify</a>
     </div>
 {% if user.is_authenticated %}
-    <div id="uzivatel">Přihlášen jako: {{ user.get_username }} (<a href="/accounts/logout?next=/">odhlásit</a>)</div>
+    <div id="uzivatel">Přihlášen jako: {{ user.get_username }} (<a href="/accounts/logout?next={{request.path}}">odhlásit</a>)</div>
 {% endif %}
 
     <div id="content">
