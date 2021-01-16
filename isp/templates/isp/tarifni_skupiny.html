@@ -9,8 +9,12 @@
 {% for tarifni_skupina in tarifni_skupiny_list %}
 <H2>
     [ID:{{ tarifni_skupina.id }}] {{ tarifni_skupina.nazev }}
-    <a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='edituj tarifní skupinu' title='edituj tarifní skupinu'></a>
-    <a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smaž tarifní skupinu' title='smaž tarifní skupinu'></a>
+   {% if perms.isp.change_tarifniskupiny %}
+        <a href="{% url 'isp:tarifni_skupina_edit' tarifni_skupina.id %}"><img src='{% static 'isp/images/edituj.gif' %}' border='0' alt='edituj tarifní skupinu' title='edituj tarifní skupinu'></a>
+   {% endif %}
+   {% if perms.isp.delete_tarifniskupiny %}
+        <a href="{% url 'isp:tarifni_skupina_smaz' tarifni_skupina.id %}"><img src='{% static 'isp/images/smazat.gif' %}' border='0' alt='smaž tarifní skupinu' title='smaž tarifní skupinu'></a>
+   {% endif %}
 </H2>
 {% if tarifni_skupina.tarify_set.all %}
 <table border="1">
@@ -38,6 +42,8 @@
 <p>Neexistují žádné tarifní skupiny.</p>
 {% endif %}
 
+{% if perms.isp.add_tarifniskupiny %}
 <BR>
 <P><a href="{% url 'isp:tarifni_skupina_vloz' %}">vložit další tarifní skupinu</a></P>
+{% endif %}
 {% endblock %}
