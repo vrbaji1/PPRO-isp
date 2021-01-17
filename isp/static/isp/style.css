@@ -37,6 +37,13 @@ body {
 	background-color: #f96;
 }
 
+/* text na uvodni strance */
+.infotext {
+	width: 650px;
+}
+.infotext p {
+	  text-align: justify;
+}
 
 /* obsah webu pod panelem */
 #content {
@@ -45,9 +52,14 @@ body {
 }
 
 table.zakaznici {
-  /* mezery mezi sloupecky tabulky */
-  border-spacing: 10px 0px;
-  border-collapse: separate;
+	border: 1px solid lightgray;
+}
+table.zakaznici tr:nth-child(even) {
+	background-color: lightgray;
+}
+table.zakaznici td {
+	/* horni, prava, dolni, leva */
+	padding: 0px 5px 0px 5px;
 }
 
 /* sede a preskrtnute */
