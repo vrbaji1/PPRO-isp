@@ -38,8 +38,8 @@ class Zakaznici(models.Model):
     prijmeni = models.CharField(max_length=50)
     telefon = models.CharField(validators=[tel_regex], max_length=16, blank=True)
     email = models.EmailField(max_length=50, blank=True)
-    id_adresy = models.ForeignKey(Adresy, on_delete=models.PROTECT, blank=True, null=True, default=None)
-    id_tarifu = models.ForeignKey(Tarify, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    id_adresy = models.ForeignKey(Adresy, on_delete=models.PROTECT, blank=True, null=True, default=None, verbose_name="Adresa")
+    id_tarifu = models.ForeignKey(Tarify, on_delete=models.PROTECT, blank=True, null=True, default=None, verbose_name="Tarif")
     def __str__(self):
         return "%s %s" % (self.jmeno, self.prijmeni)
     def ma_email(self):
@@ -47,7 +47,7 @@ class Zakaznici(models.Model):
 
 
 class Ipv4(models.Model):
-    ip_adresa = models.GenericIPAddressField(protocol='IPv4', unpack_ipv4=False)
+    ip_adresa = models.GenericIPAddressField(protocol='IPv4', unpack_ipv4=False, verbose_name="IPv4 adresa")
     aktivni = models.BooleanField(default=True)
     id_zakaznika = models.ForeignKey(Zakaznici, on_delete=models.CASCADE)
     def __str__(self):
