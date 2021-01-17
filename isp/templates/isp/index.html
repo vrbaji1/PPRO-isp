@@ -3,8 +3,27 @@
 
 {% block content %}
 
+<div class="infotext">
 <h1>Přehled</h1>
 <P>Celkem evidujeme {{ pocet_Z }} zákazníků s celkem {{ pocet_IP4 }} IPv4 adresami a {{ pocet_Z }} IPv6 adresami.</P>
 <P>Celkem evidujeme {{ pocet_TS }} tarifních skupin s celkem {{ pocet_T }} tarify.</P>
+
+<HR>
+
+<h1>Projekt PPRO</h1>
+<P>Název: <B>Část informačního systému poskytovatele internetu</B></P>
+
+<H2>Popis řešeného problému</H2>
+<P>Cílem je vytvořit část informačního systému poskytovatele. Jedná se o evidenci zákazníků, kteří jsou připojeni na&nbsp;nějaké adrese a zde podle adresy mají na&nbsp;výběr několik tarifů z tarifní skupiny podle adresy připojení. Dále jim je přidělena IPv4 a/nebo IPv6 adresa.<P>
+
+<H2>ER diagram:</H2>
+<img src='{% static 'isp/images/ER_diagram.png' %}' border='0'>
+
+<H2>Základní Use Case model:</H2>
+<img src='{% static 'isp/images/Use_Case_model.png' %}' border='0'>
+
+<H2>Použité technologie:</H2>
+<P>Django, SQLite, HTML, CSS, Git</P>
+</div>
 
 {% endblock %}
